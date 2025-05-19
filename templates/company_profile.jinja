@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ company.name }} - Solar Company in {{ company.city }}, {{ company.state }}</title>
+    <meta name="description" content="Learn about {{ company.name }}, a leading solar installation company in {{ company.city }}, {{ company.state }}. {{ company.description[:150] }}">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <nav class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/solar-companies/{{ company.state|lower }}/">Solar Companies in {{ company.state }}</a></li>
+                <li>{{ company.name }}</li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>{{ company.name }}</h1>
+            <p>Solar Installation Services in {{ company.city }}, {{ company.state }}</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="company-info">
+            <div class="info-grid">
+                <div class="info-item">
+                    <h2>Location</h2>
+                    <p>{{ company.city }}, {{ company.state }}</p>
+                </div>
+                
+                {% if company.website %}
+                <div class="info-item">
+                    <h2>Website</h2>
+                    <p><a href="{{ company.website }}" target="_blank" rel="noopener">Visit Website</a></p>
+                </div>
+                {% endif %}
+                
+                {% if company.rating %}
+                <div class="info-item">
+                    <h2>Rating</h2>
+                    <div class="rating-stars">
+                        {% for i in range(company.rating|int) %}★{% endfor %}
+                        {% for i in range(5 - company.rating|int) %}☆{% endfor %}
+                        <span>({{ company.rating }} / 5)</span>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if company.years_in_business %}
+                <div class="info-item">
+                    <h2>Experience</h2>
+                    <p>{{ company.years_in_business }} Years in Business</p>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="info-item" style="margin-top: 2rem;">
+                <h2>About {{ company.name }}</h2>
+                <p>{{ company.description }}</p>
+            </div>
+            
+            {% if company.website %}
+            <a href="{{ company.website }}" class="cta-button" target="_blank" rel="noopener">
+                Get a Free Solar Quote
+            </a>
+            {% endif %}
+        </div>
+
+        {% if related_companies %}
+        <div class="related-companies">
+            <h2>Other Solar Companies in {{ company.state }}</h2>
+            <div class="related-grid">
+                {% for related in related_companies[:3] %}
+                <div class="related-card">
+                    <h3>
+                        <a href="/solar-company/{{ related.slug }}/">{{ related.name }}</a>
+                    </h3>
+                    <p><strong>Location:</strong> {{ related.city }}</p>
+                    {% if related.rating %}
+                    <div class="rating-stars">
+                        {% for i in range(related.rating|int) %}★{% endfor %}
+                        {% for i in range(5 - related.rating|int) %}☆{% endfor %}
+                    </div>
+                    {% endif %}
+                    <a href="/solar-company/{{ related.slug }}/" class="cta-button">View Details</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </main>
+
+    <footer class="container">
+        <p>© {{ company.name }} - {{ year|default('2024') }}</p>
+        <p><a href="/solar-companies/{{ company.state|lower }}/">Back to {{ company.state }} Solar Companies</a></p>
+    </footer>
+</body>
+</html>

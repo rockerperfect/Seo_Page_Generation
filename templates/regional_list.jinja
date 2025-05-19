@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Solar Companies in {{ state_name }} - {{ year }} Guide</title>
+    <meta name="description" content="Compare {{ total_companies }} trusted solar installation companies in {{ state_name }}. Find top-rated solar providers in {{ cities|join(', ') }}.">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <nav class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>Solar Companies in {{ state_name }}</li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>Solar Companies in {{ state_name }}</h1>
+            <p>{{ total_companies }} Verified Solar Installers</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="cities-list">
+            <h2>Service Areas</h2>
+            <div class="cities-grid">
+                {% for city in cities %}
+                <div class="city-item">
+                    <span class="city-tag">{{ city }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="company-grid">
+            {% for company in companies %}
+            <article class="company-card">
+                <h2>
+                    <a href="/solar-company/{{ company.slug }}/">{{ company.name }}</a>
+                </h2>
+                
+                {% if company.rating %}
+                <div class="rating-stars">
+                    {% for i in range(company.rating|int) %}★{% endfor %}
+                    {% for i in range(5 - company.rating|int) %}☆{% endfor %}
+                    <span>({{ company.rating }} / 5)</span>
+                </div>
+                {% endif %}
+                
+                <p><strong>Location:</strong> {{ company.city }}</p>
+                
+                {% if company.years_in_business %}
+                <p><strong>Experience:</strong> {{ company.years_in_business }} Years</p>
+                {% endif %}
+                
+                <p>{{ company.description[:150] }}...</p>
+                
+                <a href="/solar-company/{{ company.slug }}/" class="cta-link">
+                    View Details
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+
+        {% if nearby_states %}
+        <div class="nearby-states">
+            <h2>Explore Nearby States</h2>
+            <div class="nearby-grid">
+                {% for state in nearby_states %}
+                <div class="nearby-card">
+                    <a href="/solar-companies/{{ state.slug }}/">
+                        Solar Companies in {{ state.name }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </main>
+
+    <footer class="container">
+        <p>© {{ year }} Solar Companies Directory - {{ state_name }}</p>
+    </footer>
+</body>
+</html> 

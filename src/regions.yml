@@ -1,0 +1,21 @@
+# Regions to process with priority
+regions:
+  - name: Texas
+    priority: 1
+    cities:
+      - Austin
+      - Dallas
+      - Houston
+
+  - name: Florida
+    priority: 1
+    cities:
+      - Miami
+      - Orlando
+      - Tampa
+
+  - name: California
+    priority: 2
+    cities:
+      - Los Angeles
+      - San Diego
