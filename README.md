@@ -8,7 +8,6 @@ The solar company data used in this project was collected manually from publicly
 - [SolarReviews.com](https://www.solarreviews.com/)
 - [Google Maps](https://maps.google.com/)
 - [Yelp.com](https://www.yelp.com/)
-- [Company websites]
 
 Each entry includes:
 - Company Name  
@@ -38,7 +37,7 @@ First, create and activate a virtual environment (optional but recommended):
 
 ```bash
 python -m venv venv
-.env\Scriptsctivate  # Windows
+.\venv\Scripts\activate  # Windows
 ```
 
 Then install required packages:
