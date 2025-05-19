@@ -76,15 +76,20 @@ The script is designed to support:
 - Adding new regions: The filtering logic is dynamic and can be updated to handle any number of states
 - Fully automated page generation: Runs through all companies and regions without hardcoded limits
 
-### ✅ Webflow Integration (Optional)
+### ✅ Webflow Integration 
 If integrating with Webflow:
-1. Prepare two CSVs:
+1. Prepared two CSVs:
    - `solar_companies.csv` for individual profile pages
    - `solar_company_regions.csv` for regional listing pages
 
-2. Upload to **Webflow CMS**:
+2. Uploaded to **Webflow CMS**:
    - Create CMS Collections: “Solar Companies” and “Solar Company Regions”
    - Bind fields to your CMS templates
    - Publish the pages
 
+The dashbord generated through webflow -:https://solarcompany-project.design.webflow.com/
+Solar Companies Template -: https://solarcompany-project.webflow.io/solar-companies/longhorn-solar
+Solar Company Region Template -: https://solarcompany-project.webflow.io/solar-company-regions/texas
+
 This setup allows scalable content generation via Python with easy publishing via Webflow.
+
